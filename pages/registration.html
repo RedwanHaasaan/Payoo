@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Tailwind CSS CDN + DaisyUI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <!-- CSS File -->
+    <link rel="stylesheet" href="../styles/style.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/logo.png" type="image/x-icon">
+    <title>Payoo | Mobile Banking App</title>
+</head>
+
+<body>
+    <main class="bg-customprimary min-h-screen max-w-md mx-auto items-center flex justify-center">
+        <div class="flex flex-col items-center gap-8 w-full">
+            <div>
+                <img src="../assets/Logo-full.png" alt="Payoo Logo">
+            </div>
+            <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-md rounded-3xl">
+                <div class="card-body">
+                    <fieldset class="fieldset gap-4">
+                        <div class="flex flex-col gap-3">
+                            <label class="label text-neutral text-base font-medium">Select a Bank</label>
+                            <select name="BankName" id="bankSelect" class="select select-bordered w-full rounded-full">
+                                <option>Select A Bank</option>
+                                <option value="AB Bank">AB Bank</option>
+                                <option value="Dutch Bangla Bank">Dutch Bangla Bank</option>
+                                <option value="Pubali Bank">Pubali Bank</option>
+                                <option value="Bank Asia">Bank Asia</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <label class="label text-neutral text-base font-medium">Full Name</label>
+                            <input type="text" id="fullNameInput"
+                                class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                                placeholder="Enter your full name" />
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <label class="label text-neutral text-base font-medium">Mobile Number</label>
+                            <input type="tel" id="registerNumberInput" maxlength="11" minlength="11"
+                                class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                                placeholder="Enter your mobile number" />
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <label class="label text-neutral text-base font-medium">Email</label>
+                            <input type="email" id="emailInput"
+                                class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                                placeholder="Enter your email address" />
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <label class="label text-neutral text-base font-medium">Date of Birth</label>
+                            <input type="date" id="dobInput"
+                                class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                                placeholder="Enter your mobile number" />
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <label class="label text-neutral text-base font-medium">Password</label>
+                            <input type="password" id="passwordInput"
+                                class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                                placeholder="Enter your password" />
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <label class="label text-neutral text-base font-medium">Confirm Password</label>
+                            <input type="password" id="confirmPasswordInput"
+                                class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                                placeholder="Re-type your password" />
+                        </div>
+                        <button id="registerBtn" class="btn btn-primary rounded-full py-4">Register</button>
+                        <span class="text-xs text-center">Already registered? <a href="../index.html"
+                                class="text-primary">Login here</a></span>
+                    </fieldset>
+                    <div role="alert" class="alert alert-error alert-soft mt-2 hidden" id="errorAlert">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Error! Invalid mobile number or password.Try again.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Script -->
+    <script type="module" src="../js/auth/registration.js"></script>
+</body>
+
+</html>

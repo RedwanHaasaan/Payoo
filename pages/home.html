@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tailwind CSS CDN + DaisyUI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <!-- CSS File -->
+    <link rel="stylesheet" href="../styles/style.css" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/logo.png" type="image/x-icon" />
+    <title>Payoo | Mobile Banking App</title>
+</head>
+
+<body>
+    <main class="bg-white min-h-screen max-w-md mx-auto p-6">
+        <section class="flex flex-row justify-between">
+            <!-- Left Container -->
+            <div class="flex flex-row gap-2">
+                <div>
+                    <img src="../assets/logo.png" alt="Payoo Logo" class="w-16 h-12" />
+                </div>
+                <div>
+                    <h1 class="text-lg font-extrabold">
+                        ৳ <span id="bankBalance">0</span>
+                    </h1>
+                    <p class="text-sm text-gray-500">Available Balance</p>
+                </div>
+            </div>
+            <!-- Right Container -->
+            <div>
+                <button class="btn btn-outline border-gray-300" id="logoutBtn">
+                    <i class="fa-solid fa-arrow-right-from-bracket rotate-180 text-gray-500"></i>
+                    <span class="text-gray-500">Logout</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="mt-8">
+            <h1 class="text-2xl font-bold">Hello,<span class="text-primary" id="userName"></span></h1>
+            <div class="flex flex-col gap-4">
+                <h1 class="text-2xl font-bold">
+                    Welcome to Pay<span class="text-primary">oo</span>
+                </h1>
+                <p class="text-base text-gray-500">
+                    Enjoy easy and convenient financial services with us. Cashout charge
+                    is low and transactions are secure.
+                </p>
+            </div>
+            <div class="grid grid-cols-3 gap-4 mt-10">
+                <!-- Card 1 -->
+                <div class="btn heroBtn flex flex-col items-center justify-center w-full max-w-sm shrink-0 shadow-md py-10 gap-2 rounded-xl"
+                    id="addMoneyBtn" data-target="addMoneySection">
+                    <div>
+                        <img src="../assets/opt-1.png" alt="Add Money Icon" />
+                    </div>
+                    <p class="text-sm text-gray-600 font-normal">Add Money</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="btn heroBtn flex flex-col items-center justify-center w-full max-w-sm shrink-0 shadow-md py-10 gap-2 rounded-xl"
+                    id="cashOutBtn" data-target="cashOutSection">
+                    <div>
+                        <img src="../assets/opt-2.png" alt="Cashout Icon" />
+                    </div>
+                    <p class="text-sm text-gray-600 font-normal">Cashout</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="btn heroBtn flex flex-col items-center justify-center w-full max-w-sm shrink-0 shadow-md py-10 px-1 gap-2 rounded-xl"
+                    id="transferMoneyBtn" data-target="transferMoneySection">
+                    <div>
+                        <img src="../assets/opt-3.png" alt="Transfer Money Icon" />
+                    </div>
+                    <p class="text-sm text-gray-600 font-normal text-center">
+                        Transfer Money
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="btn heroBtn flex flex-col items-center justify-center w-full max-w-sm shrink-0 shadow-md py-10 gap-2 rounded-xl"
+                    id="bonusBtn" data-target="bonusSection">
+                    <div>
+                        <img src="../assets/opt-4.png" alt="Get Money Icon" />
+                    </div>
+                    <p class="text-sm text-gray-600 font-normal">Get Bonus</p>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="btn heroBtn flex flex-col items-center justify-center w-full max-w-sm shrink-0 shadow-md py-10 gap-2 rounded-xl"
+                    id="payBillBtn" data-target="payBillSection">
+                    <div>
+                        <img src="../assets/opt-5.png" alt="Pay Money Icon" />
+                    </div>
+                    <p class="text-sm text-gray-600 font-normal">Pay Money</p>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="btn heroBtn flex flex-col items-center justify-center w-full max-w-sm shrink-0 shadow-md py-10 gap-2 rounded-xl"
+                    id="transactionsBtn" data-target="transactionsSection">
+                    <div>
+                        <img src="../assets/opt-6.png" alt="Transactions Icon" />
+                    </div>
+                    <p class="text-sm text-gray-600 font-normal">Transactions</p>
+                </div>
+            </div>
+        </section>
+        <!-- Add Money Section -->
+        <section class="bg-customprimary mt-10 menu-lg hidden" id="addMoneySection">
+            <h1 class="text-gray-800 font-bold p-4 pb-0">Add money</h1>
+            <div class="p-4">
+                <fieldset class="fieldset gap-4 bg-white rounded-lg p-4 min-h-[380px]">
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">Select a Bank</label>
+                        <select name="BankName" id="bankToAdd" class="select select-bordered w-full rounded-full">
+                            <option value="">Select A Bank</option>
+                            <option value="AB Bank">AB Bank</option>
+                            <option value="Dutch Bangla Bank">Dutch Bangla Bank</option>
+                            <option value="Pubali Bank">Pubali Bank</option>
+                            <option value="Bank Asia">Bank Asia</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">Bank Account Number</label>
+                        <input type="text" id="accountNumberInput"
+                            class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                            placeholder="Enter your bank account number" />
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">Account Holder Name</label>
+                        <input type="text" id="accountHolderNameInput"
+                            class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                            placeholder="Enter account holder name" />
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">Amount to Add</label>
+                        <input type="text" id="addAmountInput"
+                            class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                            placeholder="Enter amount to add" />
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">Pin Number</label>
+                        <input type="password" id="pinNumberInputAdd"
+                            class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                            placeholder="Enter your pin number" />
+                    </div>
+                    <button type="button" id="addMoneyToAcBtn" class="btn btn-primary font-extrabold rounded-full py-4">
+                        Add Money
+                    </button>
+                </fieldset>
+                <div role="alert" class="alert alert-error alert-soft mt-2 hidden" id="addMoneyErrorAlert">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>
+                        <!-- Error message will be inserted here dynamically -->
+                    </span>
+                </div>
+            </div>
+        </section>
+        <!-- Cashout Section -->
+        <section class="bg-customprimary mt-10 menu-lg hidden" id="cashOutSection">
+            <h1 class="text-gray-800 font-bold p-4 pb-0">Cashout money</h1>
+            <div class="p-4">
+                <fieldset class="fieldset gap-4 bg-white rounded-lg p-4 max-h-[380px] overflow-y-auto">
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">Agent Number</label>
+                        <input type="tel" id="agentNumberInput"
+                            class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                            placeholder="Enter your agent number" />
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">Amount</label>
+                        <input type="text" id="amountToCashout"
+                            class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                            placeholder="Enter amount to cashout" />
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">Pin Number</label>
+                        <input type="password" id="pinNumberInputCashout"
+                            class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                            placeholder="Enter your pin number" />
+                    </div>
+                    <button id="cashOutSubmitBtn" class="btn btn-primary font-extrabold rounded-full py-4">
+                        Withdraw Money
+                    </button>
+                </fieldset>
+                <div role="alert" class="alert alert-error alert-soft mt-2 hidden" id="cashOutErrorAlert">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>
+                        <!-- Error message will be inserted here dynamically -->
+                    </span>
+                </div>
+            </div>
+        </section>
+        <!-- Transfer Money Section -->
+        <section class="bg-customprimary mt-10 menu-lg hidden" id="transferMoneySection">
+            <h1 class="text-gray-800 font-bold p-4 pb-0">Transfer Money</h1>
+            <div class="p-4">
+                <fieldset class="fieldset gap-4 bg-white rounded-lg p-4 max-h-[380px] overflow-y-auto">
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">User Account Number</label>
+                        <input type="number" id="userAccountNumberInput"
+                            class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                            placeholder="Enter your user account number" />
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">Amount</label>
+                        <input type="text" id="amountToTransfer"
+                            class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                            placeholder="Enter amount to transfer" />
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">Pin Number</label>
+                        <input type="password" id="pinNumberInputTransfer"
+                            class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                            placeholder="Enter your pin number" />
+                    </div>
+                    <button id="transferMoneySubmitBtn" class="btn btn-primary font-extrabold rounded-full py-4">
+                        Send Money
+                    </button>
+                </fieldset>
+                <div role="alert" class="alert alert-error alert-soft mt-2 hidden" id="transferMoneyErrorAlert">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>
+                        <!-- Error message will be inserted here dynamically -->
+                    </span>
+                </div>
+            </div>
+        </section>
+        <!-- Get Money Section -->
+        <section class="bg-customprimary mt-10 menu-lg hidden" id="bonusSection">
+            <h1 class="text-gray-800 font-bold p-4 pb-0">Get Bonus</h1>
+            <div class="p-4">
+                <fieldset class="fieldset gap-4 bg-white rounded-lg p-4 max-h-[380px] overflow-y-auto">
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-gray-600 text-base font-medium">Get Your Bonus Coupon</label>
+                        <input type="text" id="couponInput" class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                            placeholder="Enter your coupon number" />
+                    </div>
+                    <button id="couponSubmitBtn" class="btn btn-primary font-extrabold rounded-full py-4">
+                        Get Bonus
+                    </button>
+                </fieldset>
+                <div role="alert" class="alert alert-error alert-soft mt-2 hidden" id="bonusErrorAlert">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>
+                        <!-- Error message will be inserted here dynamically -->
+                    </span>
+                </div>
+            </div>
+        </section>
+        <!-- Pay Money Section -->
+        <section class="bg-customprimary mt-10 menu-lg hidden" id="payBillSection">
+            <h1 class="text-gray-800 font-bold p-4 pb-0">Pay Bill</h1>
+            <div class="p-4">
+                <fieldset class="fieldset gap-4 bg-white rounded-lg p-4 min-h-[380px] ">
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">Select to Pay</label>
+                        <select name="paymentType" id="paySelect"
+                            class="select select-bordered w-full rounded-full text-gray-600">
+                            <option>Select Organization</option>
+                            <option value="Electricity">Electricity</option>
+                            <option value="Gas">Gas</option>
+                            <option value="Internet">Internet</option>
+                            <option value="Education Fee">Education Fee</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">Biller Account Number</label>
+                        <input type="text" id="billerAccountNumberInput"
+                            class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                            placeholder="Enter account number" />
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">Amount to Pay</label>
+                        <input type="text" id="amountToPayInput"
+                            class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                            placeholder="Enter amount to pay" />
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <label class="label text-neutral text-base font-medium">Pin Number</label>
+                        <input type="password" id="pinNumberInputPayBill"
+                            class="input rounded-full border-none bg-gray-100 px-5 py-4"
+                            placeholder="Enter your pin number" />
+                    </div>
+                    <button id="payBillSubmitBtn" class="btn btn-primary font-extrabold rounded-full py-4">
+                        Pay Now
+                    </button>
+                </fieldset>
+                <div role="alert" class="alert alert-error alert-soft mt-2 hidden" id="payBillErrorAlert">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>
+                        <!-- Error message will be inserted here dynamically -->
+                    </span>
+                </div>
+            </div>
+        </section>
+        <!-- Transactions Section -->
+        <section class="bg-customprimary mt-10 menu-lg" id="transactionsSection">
+            <h1 class="text-gray-800 font-bold p-4 pb-0">Transactions</h1>
+            <div class="p-4 flex flex-col space-y-4 max-h-[380px] overflow-y-auto" id="transactionsList">
+                <div class="bg-white rounded-2xl shadow-md p-4" id="noTransactionsMessage">
+                    <p class="text-gray-600 text-sm text-center">No transactions found.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Script -->
+    <script type="module" src="../js/homePage.js"></script>
+   
+
+</body>
+
+</html>
