@@ -1,4 +1,4 @@
-import { validateMobileNumber, getInputValue, showErrorMessage, findByField } from "../helpers/helperFunction.js";
+import { validateMobileNumber, getInputValue, showErrorMessage, findByField, getSiteBaseUrl } from "../helpers/helperFunction.js";
 import { getUserData } from "../helpers/storeArray.js";
 
 const loginBtn = document.getElementById("loginBtn");
@@ -16,6 +16,6 @@ if (loginBtn) {
         if (password !== user.userPassword) return showErrorMessage("Invalid mobile number or password. Please try again.");
 
         localStorage.setItem("loggedUserMobile", user.userMobile);
-        window.location.href = "./pages/home.html";
+        window.location.href = getSiteBaseUrl() + "pages/home.html";
     });
 }

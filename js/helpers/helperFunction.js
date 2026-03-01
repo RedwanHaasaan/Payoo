@@ -37,6 +37,16 @@ export function validateAmount(amount) {
     return !isNaN(num) && num > 0;
 }
 
+// ===== SITE BASE URL  =====
+export function getSiteBaseUrl() {
+    const pathname = typeof location !== "undefined" ? location.pathname : "";
+    const origin = typeof location !== "undefined" ? location.origin : "";
+    // Site root is the path before "/pages/" (e.g. "" or "/RepoName"), or the current directory if not in /pages/
+    const pagesIndex = pathname.indexOf("/pages/");
+    const basePath = pagesIndex >= 0 ? pathname.slice(0, pagesIndex) : pathname.replace(/\/[^/]*$/, "") || "";
+    return origin + (basePath ? basePath + "/" : "/");
+}
+
 // ===== INPUT/OUTPUT FUNCTIONS =====
 export function getInputValue(inputID) {
     const inputElement = document.getElementById(inputID);

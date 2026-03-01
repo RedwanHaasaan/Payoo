@@ -1,3 +1,5 @@
+import { getSiteBaseUrl } from "../helpers/helperFunction.js";
+
 export function initNavigation() {
     const buttons = document.querySelectorAll(".heroBtn");
     const menus = document.querySelectorAll(".menu-lg");
@@ -34,7 +36,7 @@ export function initLogout() {
     if (logoutBtn) {
         logoutBtn.addEventListener("click", function () {
             localStorage.removeItem("loggedUserMobile");
-            window.location.href = "../index.html";
+            window.location.href = getSiteBaseUrl() + "index.html";
         });
     }
 }

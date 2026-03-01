@@ -1,4 +1,4 @@
-import { validateMobileNumber, validateEmail, validatePassword, getInputValue, showErrorMessage, createUser } from "../helpers/helperFunction.js";
+import { validateMobileNumber, validateEmail, validatePassword, getInputValue, showErrorMessage, createUser, getSiteBaseUrl } from "../helpers/helperFunction.js";
 import { storeUserData, getUserData } from "../helpers/storeArray.js";
 
 const registerBtn = document.getElementById('registerBtn');
@@ -29,6 +29,6 @@ if (registerBtn) {
         const newUser = createUser(bankName, fullName, mobileNumber, email, dob, password);
         storeUserData('users', newUser);
         alert('Registration successful! Please log in with your credentials.');
-        window.location.href = '../index.html';
+        window.location.href = getSiteBaseUrl() + "index.html";
     });
 }

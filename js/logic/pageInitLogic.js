@@ -1,9 +1,9 @@
-import { setValue, refreshTransactionDisplay } from "../helpers/helperFunction.js";
+import { setValue, refreshTransactionDisplay, getSiteBaseUrl } from "../helpers/helperFunction.js";
 
 export function initPageUI(loggedUser) {
     // Check if user is logged in
     if (!loggedUser) {
-        window.location.href = "../index.html";
+        window.location.href = getSiteBaseUrl() + "index.html";
         return;
     }
 
