@@ -87,6 +87,46 @@
             </div>
         </div>
     </main>
+        <!-- Feedback Modal -->
+    <dialog id="feedback_modal" class="modal">
+        <div class="modal-box w-11/12 max-w-md p-0 overflow-hidden bg-base-100 shadow-2xl">
+
+            <!-- Top Accent Bar -->
+            <div id="feedback_accent_bar" class="h-1 w-full"></div>
+
+            <div class="px-8 py-10 text-center">
+
+                <!-- Icon -->
+                <div class="flex justify-center mb-6">
+                    <div id="feedback_icon"
+                        class="w-24 h-24 rounded-full flex items-center justify-center text-white text-5xl shadow-lg transition-all duration-300 scale-100">
+                    </div>
+                </div>
+
+                <!-- Title -->
+                <h3 id="feedback_title" class="text-2xl font-semibold tracking-tight mb-3">
+                </h3>
+
+                <!-- Message -->
+                <p id="feedback_message" class="text-base-content/70 leading-relaxed max-w-sm mx-auto">
+                </p>
+
+                <!-- Button -->
+                <div class="mt-8">
+                    <button type="button" id="feedback_button" class="btn btn-wide rounded-full px-8"
+                        onclick="closeFeedbackModal()">
+                        Continue
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Backdrop -->
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
     <!-- Script -->
     <script type="module" src="../js/auth/registration.js"></script>
 </body>

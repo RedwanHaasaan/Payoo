@@ -1,4 +1,4 @@
-import { validateMobileNumber, validateEmail, validatePassword, getInputValue, showErrorMessage, createUser, getSiteBaseUrl } from "../helpers/helperFunction.js";
+import { validateMobileNumber, validateEmail, validatePassword, getInputValue, showErrorMessage, createUser, getSiteBaseUrl, showFeedbackModal, closeFeedbackModal } from "../helpers/helperFunction.js";
 import { storeUserData, getUserData } from "../helpers/storeArray.js";
 
 const registerBtn = document.getElementById('registerBtn');
@@ -28,7 +28,15 @@ if (registerBtn) {
 
         const newUser = createUser(bankName, fullName, mobileNumber, email, dob, password);
         storeUserData('users', newUser);
-        alert('Registration successful! Please log in with your credentials.');
-        window.location.href = getSiteBaseUrl() + "index.html";
+
+        // Show success modal, then redirect to login when user clicks Continue
+        showFeedbackModal('success', "Registration successful! Please log in with your credentials.");
+        const feedbackBtn = document.getElementById('feedback_button');
+        if (feedbackBtn) {
+            feedbackBtn.onclick = () => {
+                closeFeedbackModal();
+                window.location.href = getSiteBaseUrl() + "index.html";
+            };
+        }
     });
 }

@@ -19,7 +19,7 @@ export function initNavigation() {
             // Hide all menus
             menus.forEach((menu) => menu.classList.add("hidden"));
 
-            // Get target using dataset (cleaner way)
+            // Get target using dataset
             const targetId = this.dataset.target;
             const targetMenu = document.getElementById(targetId);
 
