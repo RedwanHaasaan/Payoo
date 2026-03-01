@@ -7,6 +7,10 @@ import { initTransfer } from "./logic/transferLogic.js";
 import { initBonus } from "./logic/bonusLogic.js";
 import { initBillPayment } from "./logic/billPaymentLogic.js";
 import { getUserData } from "./helpers/storeArray.js";
+import { closeFeedbackModal } from "./helpers/helperFunction.js";
+
+// Expose for modal OK button (onclick in HTML)
+window.closeFeedbackModal = closeFeedbackModal;
 
 // Get user data
 const users = getUserData("users") || [];

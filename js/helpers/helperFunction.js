@@ -56,14 +56,40 @@ export function showErrorMessage(message) {
         setTimeout(() => errorAlert.classList.add('hidden'), 3000);
     }
 }
+// ===== FEEDBACK MODAL FUNCTIONS =====
+export function showFeedbackModal(type, message) {
+    const modal = document.getElementById('feedback_modal');
+    const icon = document.getElementById('feedback_icon');
+    const title = document.getElementById('feedback_title');
+    const messageBox = document.getElementById('feedback_message');
+    const button = document.getElementById('feedback_button');
+    const accentBar = document.getElementById('feedback_accent_bar');
 
-export function showErrorAlert(alertId, message) {
-    const errorAlert = document.getElementById(alertId);
-    if (errorAlert) {
-        errorAlert.innerHTML = `<span>${message}</span>`;
-        errorAlert.classList.remove('hidden');
-        setTimeout(() => errorAlert.classList.add('hidden'), 3000);
+    if (!modal) return;
+
+    messageBox.textContent = message;
+
+    if (type === "success") {
+        icon.className = "w-24 h-24 rounded-full flex items-center justify-center bg-success text-white text-5xl shadow-lg transition-all duration-300";
+        icon.innerHTML = "✓";
+        title.textContent = "Success";
+        title.className = "text-2xl font-semibold tracking-tight mb-3 text-success";
+        button.className = "btn btn-success btn-wide rounded-full px-8 text-white";
+        accentBar.className = "h-1 w-full bg-success";
+    } else {
+        icon.className = "w-24 h-24 rounded-full flex items-center justify-center bg-error text-white text-5xl shadow-lg transition-all duration-300";
+        icon.innerHTML = "✕";
+        title.textContent = "Something went wrong";
+        title.className = "text-2xl font-semibold tracking-tight mb-3 text-error";
+        button.className = "btn btn-error btn-wide rounded-full px-8 text-white";
+        accentBar.className = "h-1 w-full bg-error";
     }
+
+    modal.showModal();
+}
+
+export function closeFeedbackModal() {
+    document.getElementById('feedback_modal')?.close();
 }
 
 export function clearFormInputs(inputIds) {
@@ -119,7 +145,7 @@ export function processTransaction(config) {
     refreshTransactionDisplay(loggedUser);
     
     const action = isMoneyIn(type) ? "received" : "transferred";
-    alert(`Successfully ${action} ৳${amount}. New balance: ৳${newBalance}`);
+    showFeedbackModal("success", `Successfully ${action} ৳${amount}. New balance: ৳${newBalance}`);
 }
 
 export function getTransactionLabel(type) {

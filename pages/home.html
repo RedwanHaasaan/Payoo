@@ -152,16 +152,6 @@
                         Add Money
                     </button>
                 </fieldset>
-                <div role="alert" class="alert alert-error alert-soft mt-2 hidden" id="addMoneyErrorAlert">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>
-                        <!-- Error message will be inserted here dynamically -->
-                    </span>
-                </div>
             </div>
         </section>
         <!-- Cashout Section -->
@@ -191,16 +181,6 @@
                         Withdraw Money
                     </button>
                 </fieldset>
-                <div role="alert" class="alert alert-error alert-soft mt-2 hidden" id="cashOutErrorAlert">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>
-                        <!-- Error message will be inserted here dynamically -->
-                    </span>
-                </div>
             </div>
         </section>
         <!-- Transfer Money Section -->
@@ -230,16 +210,6 @@
                         Send Money
                     </button>
                 </fieldset>
-                <div role="alert" class="alert alert-error alert-soft mt-2 hidden" id="transferMoneyErrorAlert">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>
-                        <!-- Error message will be inserted here dynamically -->
-                    </span>
-                </div>
             </div>
         </section>
         <!-- Get Money Section -->
@@ -256,16 +226,6 @@
                         Get Bonus
                     </button>
                 </fieldset>
-                <div role="alert" class="alert alert-error alert-soft mt-2 hidden" id="bonusErrorAlert">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>
-                        <!-- Error message will be inserted here dynamically -->
-                    </span>
-                </div>
             </div>
         </section>
         <!-- Pay Money Section -->
@@ -306,16 +266,6 @@
                         Pay Now
                     </button>
                 </fieldset>
-                <div role="alert" class="alert alert-error alert-soft mt-2 hidden" id="payBillErrorAlert">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>
-                        <!-- Error message will be inserted here dynamically -->
-                    </span>
-                </div>
             </div>
         </section>
         <!-- Transactions Section -->
@@ -329,9 +279,50 @@
         </section>
     </main>
 
+    <!-- Feedback Modal -->
+    <dialog id="feedback_modal" class="modal">
+        <div class="modal-box w-11/12 max-w-md p-0 overflow-hidden bg-base-100 shadow-2xl">
+
+            <!-- Top Accent Bar -->
+            <div id="feedback_accent_bar" class="h-1 w-full"></div>
+
+            <div class="px-8 py-10 text-center">
+
+                <!-- Icon -->
+                <div class="flex justify-center mb-6">
+                    <div id="feedback_icon"
+                        class="w-24 h-24 rounded-full flex items-center justify-center text-white text-5xl shadow-lg transition-all duration-300 scale-100">
+                    </div>
+                </div>
+
+                <!-- Title -->
+                <h3 id="feedback_title" class="text-2xl font-semibold tracking-tight mb-3">
+                </h3>
+
+                <!-- Message -->
+                <p id="feedback_message" class="text-base-content/70 leading-relaxed max-w-sm mx-auto">
+                </p>
+
+                <!-- Button -->
+                <div class="mt-8">
+                    <button type="button" id="feedback_button" class="btn btn-wide rounded-full px-8"
+                        onclick="closeFeedbackModal()">
+                        Continue
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Backdrop -->
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
+
     <!-- Script -->
     <script type="module" src="../js/homePage.js"></script>
-   
+
 
 </body>
 

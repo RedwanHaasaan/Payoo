@@ -1,4 +1,4 @@
-import { getInputValue, validatePin, validateAmount, showErrorAlert, processTransaction } from "../helpers/helperFunction.js";
+import { getInputValue, validatePin, validateAmount, showFeedbackModal, processTransaction } from "../helpers/helperFunction.js";
 
 export function initCashout(users, loggedUser) {
     const cashOutBtn = document.getElementById("cashOutSubmitBtn");
@@ -9,10 +9,10 @@ export function initCashout(users, loggedUser) {
             const amount = parseFloat(getInputValue("amountToCashout"));
             const pin = getInputValue("pinNumberInputCashout");
 
-            if (!agentNumber) return showErrorAlert('cashOutErrorAlert', "Please enter agent number");
-            if (!validatePin(pin)) return showErrorAlert('cashOutErrorAlert', "PIN must be at least 4 digits");
-            if (!validateAmount(amount)) return showErrorAlert('cashOutErrorAlert', "Please enter a valid amount");
-            if (amount > loggedUser.bankBalance) return showErrorAlert('cashOutErrorAlert', "Insufficient balance");
+            if (!agentNumber) return showFeedbackModal('error', "Please enter agent number");
+            if (!validatePin(pin)) return showFeedbackModal('error', "PIN must be at least 4 digits");
+            if (!validateAmount(amount)) return showFeedbackModal('error', "Please enter a valid amount");
+            if (amount > loggedUser.bankBalance) return showFeedbackModal('error', "Insufficient balance");
 
             processTransaction({
                 users,

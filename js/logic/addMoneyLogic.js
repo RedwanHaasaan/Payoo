@@ -1,4 +1,4 @@
-import { getInputValue, validatePin, validateAmount, showErrorAlert, processTransaction } from "../helpers/helperFunction.js";
+import { getInputValue, validatePin, validateAmount, showFeedbackModal, processTransaction } from "../helpers/helperFunction.js";
 
 export function initAddMoney(users, loggedUser) {
     const addMoneyBtn = document.getElementById("addMoneyToAcBtn");
@@ -11,11 +11,11 @@ export function initAddMoney(users, loggedUser) {
             const amount = parseFloat(getInputValue("addAmountInput"));
             const pin = getInputValue("pinNumberInputAdd");
 
-            if (!bank) return showErrorAlert('addMoneyErrorAlert', "Please select a bank");
-            if (!accountNumber) return showErrorAlert('addMoneyErrorAlert', "Please enter account number");
-            if (!accountHolderName) return showErrorAlert('addMoneyErrorAlert', "Please enter account holder name");
-            if (!validatePin(pin)) return showErrorAlert('addMoneyErrorAlert', "PIN must be at least 4 digits");
-            if (!validateAmount(amount)) return showErrorAlert('addMoneyErrorAlert', "Please enter a valid amount");
+            if (!bank) return showFeedbackModal('error', "Please select a bank");
+            if (!accountNumber) return showFeedbackModal('error', "Please enter account number");
+            if (!accountHolderName) return showFeedbackModal('error', "Please enter account holder name");
+            if (!validatePin(pin)) return showFeedbackModal('error', "PIN must be at least 4 digits");
+            if (!validateAmount(amount)) return showFeedbackModal('error', "Please enter a valid amount");
 
             processTransaction({
                 users,

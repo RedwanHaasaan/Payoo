@@ -1,4 +1,4 @@
-import { getInputValue, validatePin, validateAmount, showErrorAlert, processTransaction } from "../helpers/helperFunction.js";
+import { getInputValue, validatePin, validateAmount, showFeedbackModal, processTransaction } from "../helpers/helperFunction.js";
 
 export function initTransfer(users, loggedUser) {
     const transferBtn = document.getElementById("transferMoneySubmitBtn");
@@ -9,10 +9,10 @@ export function initTransfer(users, loggedUser) {
             const amount = parseFloat(getInputValue("amountToTransfer"));
             const pin = getInputValue("pinNumberInputTransfer");
 
-            if (!userAccountNumber) return showErrorAlert('transferMoneyErrorAlert', "Please enter recipient account number");
-            if (!validatePin(pin)) return showErrorAlert('transferMoneyErrorAlert', "PIN must be at least 4 digits");
-            if (!validateAmount(amount)) return showErrorAlert('transferMoneyErrorAlert', "Please enter a valid amount");
-            if (amount > loggedUser.bankBalance) return showErrorAlert('transferMoneyErrorAlert', "Insufficient balance");
+            if (!userAccountNumber) return showFeedbackModal('error', "Please enter recipient account number");
+            if (!validatePin(pin)) return showFeedbackModal('error', "PIN must be at least 4 digits");
+            if (!validateAmount(amount)) return showFeedbackModal('error', "Please enter a valid amount");
+            if (amount > loggedUser.bankBalance) return showFeedbackModal('error', "Insufficient balance");
 
             processTransaction({
                 users,
