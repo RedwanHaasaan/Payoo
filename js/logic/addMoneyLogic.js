@@ -1,4 +1,4 @@
-import { getInputValue, validatePin, validateAmount, showFeedbackModal, processTransaction } from "../helpers/helperFunction.js";
+import { getInputValue, isPasswordMatch, validateAmount, showFeedbackModal, processTransaction } from "../helpers/helperFunction.js";
 
 export function initAddMoney(users, loggedUser) {
     const addMoneyBtn = document.getElementById("addMoneyToAcBtn");
@@ -9,12 +9,12 @@ export function initAddMoney(users, loggedUser) {
             const accountNumber = getInputValue("accountNumberInput");
             const accountHolderName = getInputValue("accountHolderNameInput");
             const amount = parseFloat(getInputValue("addAmountInput"));
-            const pin = getInputValue("pinNumberInputAdd");
+            const password = getInputValue("passwordInputAdd");
 
             if (!bank) return showFeedbackModal('error', "Please select a bank");
             if (!accountNumber) return showFeedbackModal('error', "Please enter account number");
             if (!accountHolderName) return showFeedbackModal('error', "Please enter account holder name");
-            if (!validatePin(pin)) return showFeedbackModal('error', "PIN must be at least 4 digits");
+            if (!isPasswordMatch(password, loggedUser.userPassword)) return showFeedbackModal('error', "Password is not matched");
             if (!validateAmount(amount)) return showFeedbackModal('error', "Please enter a valid amount");
 
             processTransaction({
@@ -22,7 +22,7 @@ export function initAddMoney(users, loggedUser) {
                 loggedUser,
                 type: "deposit",
                 amount,
-                inputIds: ["bankToAdd", "accountNumberInput", "accountHolderNameInput", "addAmountInput", "pinNumberInputAdd"]
+                inputIds: ["bankToAdd", "accountNumberInput", "accountHolderNameInput", "addAmountInput", "passwordInputAdd"]
             });
         });
     }

@@ -15,7 +15,7 @@ if (registerBtn) {
         const confirmPassword = getInputValue('confirmPasswordInput');
 
         if (!fullName || !mobileNumber || !email || !dob || !password || !confirmPassword) return showErrorMessage('Please fill in all fields.');
-        if (bankName === 'Select Bank') return showErrorMessage('Please select a bank.');
+        if (!bankName || bankName === 'Select A Bank') return showErrorMessage('Please select a bank.');
         if (!validateMobileNumber(mobileNumber)) return showErrorMessage('Please enter a valid mobile number.');
         if (!validateEmail(email)) return showErrorMessage('Please enter a valid email address.');
         

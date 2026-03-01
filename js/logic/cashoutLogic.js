@@ -1,4 +1,4 @@
-import { getInputValue, validatePin, validateAmount, showFeedbackModal, processTransaction } from "../helpers/helperFunction.js";
+import { getInputValue, isPasswordMatch, validateAmount, showFeedbackModal, processTransaction } from "../helpers/helperFunction.js";
 
 export function initCashout(users, loggedUser) {
     const cashOutBtn = document.getElementById("cashOutSubmitBtn");
@@ -7,10 +7,10 @@ export function initCashout(users, loggedUser) {
         cashOutBtn.addEventListener("click", function () {
             const agentNumber = getInputValue("agentNumberInput");
             const amount = parseFloat(getInputValue("amountToCashout"));
-            const pin = getInputValue("pinNumberInputCashout");
+            const password = getInputValue("passwordInputCashout");
 
             if (!agentNumber) return showFeedbackModal('error', "Please enter agent number");
-            if (!validatePin(pin)) return showFeedbackModal('error', "PIN must be at least 4 digits");
+            if (!isPasswordMatch(password, loggedUser.userPassword)) return showFeedbackModal('error', "Password is not matched");
             if (!validateAmount(amount)) return showFeedbackModal('error', "Please enter a valid amount");
             if (amount > loggedUser.bankBalance) return showFeedbackModal('error', "Insufficient balance");
 
@@ -19,7 +19,7 @@ export function initCashout(users, loggedUser) {
                 loggedUser,
                 type: "withdrawal",
                 amount,
-                inputIds: ["agentNumberInput", "amountToCashout", "pinNumberInputCashout"]
+                inputIds: ["agentNumberInput", "amountToCashout", "passwordInputCashout"]
             });
         });
     }

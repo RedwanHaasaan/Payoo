@@ -1,4 +1,4 @@
-import { getInputValue, validatePin, validateAmount, showFeedbackModal, processTransaction } from "../helpers/helperFunction.js";
+import { getInputValue, isPasswordMatch, validateAmount, showFeedbackModal, processTransaction } from "../helpers/helperFunction.js";
 
 export function initBillPayment(users, loggedUser) {
     const payBillBtn = document.getElementById("payBillSubmitBtn");
@@ -8,11 +8,11 @@ export function initBillPayment(users, loggedUser) {
             const organization = getInputValue("paySelect");
             const billerAccountNumber = getInputValue("billerAccountNumberInput");
             const amount = parseFloat(getInputValue("amountToPayInput"));
-            const pin = getInputValue("pinNumberInputPayBill");
+            const password = getInputValue("passwordInputPayBill");
 
             if (!organization || organization === "Select Organization") return showFeedbackModal('error', "Please select an organization");
             if (!billerAccountNumber) return showFeedbackModal('error', "Please enter biller account number");
-            if (!validatePin(pin)) return showFeedbackModal('error', "PIN must be at least 4 digits");
+            if (!isPasswordMatch(password, loggedUser.userPassword)) return showFeedbackModal('error', "Password is not matched");
             if (!validateAmount(amount)) return showFeedbackModal('error', "Please enter a valid amount");
             if (amount > loggedUser.bankBalance) return showFeedbackModal('error', "Insufficient balance");
 
@@ -21,7 +21,7 @@ export function initBillPayment(users, loggedUser) {
                 loggedUser,
                 type: "bill_payment",
                 amount,
-                inputIds: ["paySelect", "billerAccountNumberInput", "amountToPayInput", "pinNumberInputPayBill"]
+                inputIds: ["paySelect", "billerAccountNumberInput", "amountToPayInput", "passwordInputPayBill"]
             });
         });
     }

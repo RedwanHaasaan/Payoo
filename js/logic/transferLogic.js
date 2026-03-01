@@ -1,4 +1,4 @@
-import { getInputValue, validatePin, validateAmount, showFeedbackModal, processTransaction } from "../helpers/helperFunction.js";
+import { getInputValue, isPasswordMatch, validateAmount, showFeedbackModal, processTransaction } from "../helpers/helperFunction.js";
 
 export function initTransfer(users, loggedUser) {
     const transferBtn = document.getElementById("transferMoneySubmitBtn");
@@ -7,10 +7,10 @@ export function initTransfer(users, loggedUser) {
         transferBtn.addEventListener("click", function () {
             const userAccountNumber = getInputValue("userAccountNumberInput");
             const amount = parseFloat(getInputValue("amountToTransfer"));
-            const pin = getInputValue("pinNumberInputTransfer");
+            const password = getInputValue("passwordInputTransfer");
 
             if (!userAccountNumber) return showFeedbackModal('error', "Please enter recipient account number");
-            if (!validatePin(pin)) return showFeedbackModal('error', "PIN must be at least 4 digits");
+            if (!isPasswordMatch(password, loggedUser.userPassword)) return showFeedbackModal('error', "Password is not matched");
             if (!validateAmount(amount)) return showFeedbackModal('error', "Please enter a valid amount");
             if (amount > loggedUser.bankBalance) return showFeedbackModal('error', "Insufficient balance");
 
@@ -19,7 +19,7 @@ export function initTransfer(users, loggedUser) {
                 loggedUser,
                 type: "transfer",
                 amount,
-                inputIds: ["userAccountNumberInput", "amountToTransfer", "pinNumberInputTransfer"]
+                inputIds: ["userAccountNumberInput", "amountToTransfer", "passwordInputTransfer"]
             });
         });
     }

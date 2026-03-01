@@ -12,6 +12,9 @@ export function validateEmail(email) {
 }
 
 export function validatePassword(password) {
+    if (password == null || typeof password !== "string") {
+        return { isValid: false, errors: ["Password is required."] };
+    }
     const passwordInput = password.trim();
     const errors = [];
 
@@ -28,8 +31,9 @@ export function validatePassword(password) {
     };
 }
 
-export function validatePin(pin) { 
-    return pin && pin.length >= 4;
+/** Returns true if the entered password matches the user's password (for transactions). */
+export function isPasswordMatch(password, userPassword) {
+    return password && password.length >= 4 && password === userPassword;
 }
 
 export function validateAmount(amount) {
@@ -41,7 +45,6 @@ export function validateAmount(amount) {
 export function getSiteBaseUrl() {
     const pathname = typeof location !== "undefined" ? location.pathname : "";
     const origin = typeof location !== "undefined" ? location.origin : "";
-    // Site root is the path before "/pages/" (e.g. "" or "/RepoName"), or the current directory if not in /pages/
     const pagesIndex = pathname.indexOf("/pages/");
     const basePath = pagesIndex >= 0 ? pathname.slice(0, pagesIndex) : pathname.replace(/\/[^/]*$/, "") || "";
     return origin + (basePath ? basePath + "/" : "/");
