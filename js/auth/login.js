@@ -16,6 +16,6 @@ if (loginBtn) {
         if (password !== user.userPassword) return showErrorMessage("Invalid mobile number or password. Please try again.");
 
         localStorage.setItem("loggedUserMobile", user.userMobile);
-        window.location.href = "../pages/home.html";
+        window.location.href = "./pages/home.html";
     });
 }
